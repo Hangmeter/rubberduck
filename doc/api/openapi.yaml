@@ -1,0 +1,26 @@
+openapi: 3.0.3
+info:
+  title: RubberDuck (Aikiduck) API
+  description: REST API спецификация для хобби-проекта Aikiduck
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Локальный сервер разработки
+paths:
+  /api/health:
+    get:
+      summary: Проверка статуса работоспособности бэкенда
+      responses:
+        '200':
+          description: Успешный ответ сервера
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "OK"
+                  message:
+                    type: string
+                    example: "Aikiduck backend is running"
