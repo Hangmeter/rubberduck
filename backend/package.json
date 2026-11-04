@@ -1,0 +1,13 @@
+{
+  "name": "rubberduck-backend",
+  "version": "1.0.0",
+  "description": "Aikiduck MVP Backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@fastify/static": "^8.0.0",
+    "fastify": "^5.0.0"
+  }
+}

@@ -1,4 +1,4 @@
-version: '3.8'
+# version: '3.8'
 
 services:
   db:
@@ -10,7 +10,7 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD:-rubberduckrpass}
       POSTGRES_DB: ${DB_NAME:-rubberduck_db}
     ports:
-      - "127.0.0.1:5432:5432" # Доступ к БД только локально с VPS ради безопасности
+      - "127.0.0.1:5452:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
       # Скрипт инициализации таблиц (подмонтируем из проекта)
@@ -25,12 +25,12 @@ services:
     # На этапе скелета запускаем контейнер в режиме ожидания кода
     command: sh -c "cd /app && npm install --quiet && node server.js"
     ports:
-      - "8080:8080" # Открываем веб-порт наружу
+      - "8100:8100" # Открываем веб-порт наружу
     volumes:
       - ./backend:/app
     environment:
       - DATABASE_URL=postgres://${DB_USER:-rubberduck_user}:${DB_PASSWORD:--rubberduckpass}@db:5432/${DB_NAME:-rubberduck_db}
-      - PORT=8080
+      - PORT=8100
       - NODE_ENV=development
     depends_on:
       - db
