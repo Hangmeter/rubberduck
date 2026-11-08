@@ -21,7 +21,7 @@ CREATE TABLE sessions (
 -- 3. Шаг 1: Фиксация состояния (Связь 1-к-1 с сессией)
 CREATE TABLE session_states (
     session_id INTEGER PRIMARY KEY REFERENCES sessions(id) ON DELETE CASCADE,
-    emotion emotion_type NOT NULL, -- Жесткая проверка на уровне БД
+    emotion emotion_type[] NOT NULL, -- Жесткая проверка на уровне БД
     user_text TEXT,                -- Описание «что со мной происходит»
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );

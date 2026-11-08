@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aikiduck — Экран приветствия</title>
     <style>
+        [hidden] { display: none !important; }
+        fieldset { border: 0; min-width: 0; }
+        legend { font-weight: 600; margin-bottom: 12px; }
+        .emotion-options { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+        .emotion-option { display: flex; align-items: center; gap: 8px; border: 1px solid #718096; border-radius: 12px; padding: 12px; cursor: pointer; }
+        .emotion-option:has(input:checked) { background: #ebf8ff; border-color: #3182ce; }
+        .emotion-option:has(input:disabled) { opacity: .55; cursor: default; }
+        .emotion-option:focus-within { outline: 3px solid #3182ce; outline-offset: 2px; }
+        .cta-button:disabled { opacity: .55; cursor: default; transform: none; }
+        #selection-count { margin-bottom: 16px; }
+        .request-error { color: #9b2c2c; padding: 0 24px 24px; }
         /* Базовые стили */
         * {
             box-sizing: border-box;
@@ -221,7 +232,8 @@
 </head>
 <body>
 
-    <div class="app-container">
+    <main class="app-container">
+    <div id="welcome-screen">
         <!-- Верхний блок: Утка + Слоган + Описание -->
         <div class="hero-section">
             <div class="hero-image" title="Здесь будет изображение Aikiduck"></div>
@@ -266,12 +278,30 @@
 
         <!-- Кнопка -->
         <div class="cta-section">
-            <button class="cta-button">Оценить своё состояние</button>
+            <button id="start-button" class="cta-button" type="button">Оценить своё состояние</button>
             <div class="cta-subtext">
                 Начните с честного чекина, остальное вместе <span class="cta-arrow">→</span>
             </div>
         </div>
     </div>
-
+    <section id="state-screen" class="content-section" hidden aria-labelledby="state-title">
+        <h1 id="state-title" tabindex="-1">Что сейчас с вами?</h1>
+        <p>Можно выбрать от одного до четырёх состояний. Здесь нет неправильных ответов.</p>
+        <form id="state-form">
+            <fieldset>
+                <legend>Что откликается сейчас?</legend>
+                <div id="emotion-options" class="emotion-options"></div>
+            </fieldset>
+            <p id="selection-count" role="status">Выбрано: 0 из 4</p>
+            <button id="next-button" class="cta-button" type="submit" disabled>Далее</button>
+        </form>
+    </section>
+    <section id="saved-screen" class="content-section" hidden aria-labelledby="saved-title">
+        <h1 id="saved-title" tabindex="-1">Состояния сохранены</h1>
+        <p>Спасибо, что заметили, как вы сейчас. Можно немного побыть с этим.</p>
+    </section>
+    <p id="request-error" class="request-error" role="alert" hidden></p>
+    </main>
+    <script src="/app.js" defer></script>
 </body>
 </html>
