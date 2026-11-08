@@ -19,7 +19,7 @@ services:
       - rubberduck_network
 
   backend:
-    image: node:18-alpine
+    image: node:22-alpine
     container_name: rubberduck_backend
     restart: always
     # На этапе скелета запускаем контейнер в режиме ожидания кода
@@ -29,7 +29,7 @@ services:
     volumes:
       - ./backend:/app
     environment:
-      - DATABASE_URL=postgres://${DB_USER:-rubberduck_user}:${DB_PASSWORD:--rubberduckpass}@db:5432/${DB_NAME:-rubberduck_db}
+      - DATABASE_URL=postgres://${DB_USER:-rubberduck_user}:${DB_PASSWORD:-rubberduckrpass}@db:5432/${DB_NAME:-rubberduck_db}
       - PORT=8100
       - NODE_ENV=development
     depends_on:
